@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Box } from "@mui/material";
 import  Navbar  from "@/scenes/navbar"
 
+// Main app component
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), [])
   return (
