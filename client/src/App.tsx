@@ -4,7 +4,8 @@ import { themeSettings } from "./theme"
 import { ThemeProvider, CssBaseline } from "@mui/material"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Box } from "@mui/material";
-import  Navbar  from "@/scenes/navbar"
+import  Navbar  from "@/scenes/navbar";
+import Dashboard from "@/scenes/dashboard"
 
 // Main app component
 function App() {
@@ -19,8 +20,7 @@ function App() {
             <Navbar />
             <Routes>
 
-              <Route path="/" element={
-                <div>Dashboard Pages</div>}/>
+              <Route path="/" element={<Dashboard />}/>
 
               <Route path="/predictions" element={
                 <div>Prediction Page</div>}/>
