@@ -16,6 +16,7 @@ const gridTemplate = `
 function Dashboard() {
     useTheme();
   return (
+    // utilising grid layout
     <Box width="100%" height="100%" display="grid" gap="1.5rem"
         sx={{
             gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
