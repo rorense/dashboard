@@ -19,6 +19,7 @@ function Dashboard() {
     // utilising grid layout
     <Box width="100%" height="100%" display="grid" gap="1.5rem"
         sx={{
+            // Grid template column
             gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
             gridTemplateRows: "repeat(10, minmax(60px, 1fr))",
             gridTemplateAreas: gridTemplate,
