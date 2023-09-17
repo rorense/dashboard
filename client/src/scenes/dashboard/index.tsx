@@ -1,6 +1,6 @@
 import { Box, useTheme } from '@mui/material';
 
-// Setting up grid layout
+// Setting up grid layout.
 const gridTemplate = `
     "a b c"
     "a b c"
