@@ -1,7 +1,7 @@
-import { Box, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 // Setting up grid layout.
-const gridTemplate = `
+const gridTemplateLargeScreens = `
     "a b c"
     "a b c"
     "a b c"
@@ -14,27 +14,67 @@ const gridTemplate = `
     "g h j"
 `
 
+const gridtemplateSmallScreens = `
+  "a"
+  "a"
+  "a"
+  "a"
+  "b"
+  "b"
+  "b"
+  "b"
+  "c"
+  "c"
+  "c"
+  "d"
+  "d"
+  "d"
+  "e"
+  "e"
+  "f"
+  "f"
+  "f"
+  "g"
+  "g"
+  "g"
+  "h"
+  "h"
+  "h"
+  "h"
+  "i"
+  "i"
+  "j"
+  "j"
+`
+
+
 function Dashboard() {
+    const isAboveMediumScreens = useMediaQuery("(min-width: 1200px");
     useTheme();
   return (
     // utilising grid layout
     <Box width="100%" height="100%" display="grid" gap="1.5rem"
-        sx={{
+        sx={
+          isAboveMediumScreens ? {
             // Grid template column
             gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
             gridTemplateRows: "repeat(10, minmax(60px, 1fr))",
-            gridTemplateAreas: gridTemplate,
+            gridTemplateAreas: gridTemplateLargeScreens,
+        } : {
+          gridTemplateAreas: gridtemplateSmallScreens,
+          gridAutoColumns: "1fr",
+          gridAutoRows: "80px"
         }}>
-        <Box gridArea="a"></Box>
-        <Box gridArea="b"></Box>
-        <Box gridArea="c"></Box>
-        <Box gridArea="d"></Box>
-        <Box gridArea="e"></Box>
-        <Box gridArea="f"></Box>
-        <Box gridArea="g"></Box>
-        <Box gridArea="h"></Box>
-        <Box gridArea="i"></Box>
-        <Box gridArea="j"></Box>
+        <Box bgcolor="white" gridArea="a"></Box>
+        <Box bgcolor="white" gridArea="b"></Box>
+        <Box bgcolor="white" gridArea="c"></Box>
+        <Box bgcolor="white" gridArea="d"></Box>
+        <Box bgcolor="white" gridArea="e"></Box>
+        <Box bgcolor="white" gridArea="f"></Box>
+        <Box bgcolor="white" gridArea="g"></Box>
+        <Box bgcolor="white" gridArea="h"></Box>
+        <Box bgcolor="white" gridArea="i"></Box>
+        <Box bgcolor="white" gridArea="j"></Box>
     </Box>
 
   )
