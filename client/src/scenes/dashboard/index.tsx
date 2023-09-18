@@ -1,6 +1,9 @@
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
+import Row1 from './Row1';
+import Row2 from './Row2';
+import Row3 from './Row3';
 
-// Setting up grid layout.
+// Setting up grid layout for bigger screens
 const gridTemplateLargeScreens = `
     "a b c"
     "a b c"
@@ -14,6 +17,7 @@ const gridTemplateLargeScreens = `
     "g h j"
 `
 
+// Grid layout for smaller screens
 const gridtemplateSmallScreens = `
   "a"
   "a"
@@ -47,10 +51,9 @@ const gridtemplateSmallScreens = `
   "j"
 `
 
-
 function Dashboard() {
     const isAboveMediumScreens = useMediaQuery("(min-width: 1200px");
-    useTheme();
+
   return (
     // utilising grid layout
     <Box width="100%" height="100%" display="grid" gap="1.5rem"
@@ -65,18 +68,10 @@ function Dashboard() {
           gridAutoColumns: "1fr",
           gridAutoRows: "80px"
         }}>
-        <Box bgcolor="white" gridArea="a"></Box>
-        <Box bgcolor="white" gridArea="b"></Box>
-        <Box bgcolor="white" gridArea="c"></Box>
-        <Box bgcolor="white" gridArea="d"></Box>
-        <Box bgcolor="white" gridArea="e"></Box>
-        <Box bgcolor="white" gridArea="f"></Box>
-        <Box bgcolor="white" gridArea="g"></Box>
-        <Box bgcolor="white" gridArea="h"></Box>
-        <Box bgcolor="white" gridArea="i"></Box>
-        <Box bgcolor="white" gridArea="j"></Box>
+        <Row1 />
+        <Row2 />
+        <Row3 />
     </Box>
-
   )
 }
 
