@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 
-// Configuration of backend tools
+// Configuration of backend tools.
 dotenv.config();
 const app = express();
 app.use(express.json());
