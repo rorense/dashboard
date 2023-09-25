@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import kpiRoutes from "./routes/kpi.js";
+import KPI from "./models/KPI.js";
+import { kpis } from "./data/data.js";
 
 // Configuration of backend tools.
 dotenv.config();
@@ -30,5 +32,11 @@ mongoose
     })
     .then (async () => {
         app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+        // Add data one time only or as needed.
+        // getting rid of old database
+        // await mongoose.connection.db.dropDatabase();
+        // KPI.insertMany(kpis);
+
     })
     .catch((error) => console.log(`${error} did not connect`));
