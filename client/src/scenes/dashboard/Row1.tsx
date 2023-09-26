@@ -3,6 +3,7 @@ import { useGetKpisQuery } from '@/state/api'
 import React from 'react'
 
 const Row1 = () => {
+  // Importing data from KPIs.
   const { data } = useGetKpisQuery();
   console.log("data:", data)
 
