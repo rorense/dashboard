@@ -1,15 +1,30 @@
 import DashboardBox from '@/components/DashboardBox'
 import { useGetKpisQuery } from '@/state/api'
-import React from 'react'
+import { useTheme } from '@mui/material';
+import React, { useMemo } from 'react'
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-const Row1 = () => {
+const Row1 = (props) => {
   // Importing data from KPIs
   const { data } = useGetKpisQuery();
   console.log("data:", data)
+  const { palette } = useTheme();
+
+  const revenueExpenses = useMemo(() => {
+    return (
+      data && 
+        data[0].monthlyData.map(({ month, revenue, expenses }) => {
+          return {
+            name: month.substring(0, 3),
+            revenue: revenue,
+            expenses: expenses,
+          }
+        })
+    );
+  }, [data]);
 
   return (
-    <>
+    <> 
         <DashboardBox gridArea="a">
           <ResponsiveContainer width="100%" height="100%">
           <AreaChart
@@ -24,10 +39,25 @@ const Row1 = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name" tickLine={false}/>
             <YAxis />
             <Tooltip />
-            <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+            <Area 
+              type="monotone" 
+              dataKey="revenue" 
+              stroke={palette.primary.main} 
+              dot={true}
+              fillOpacity={1} 
+              fill="url(#colorRevenue)"/>
+
+            <Area 
+              type="monotone" 
+              dataKey="expenses" 
+              dot={true}
+              stroke={palette.primary.main} 
+              fillOpacity={1} 
+              fill="url(#colorExpenses)"/>
+
           </AreaChart>
         </ResponsiveContainer>
         </DashboardBox>
