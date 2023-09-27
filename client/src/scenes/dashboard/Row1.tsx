@@ -2,9 +2,9 @@ import DashboardBox from '@/components/DashboardBox'
 import { useGetKpisQuery } from '@/state/api'
 import { useTheme } from '@mui/material';
 import React, { useMemo } from 'react'
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-const Row1 = (props) => {
+const Row1 = () => {
   // Importing data from KPIs
   const { data } = useGetKpisQuery();
   console.log("data:", data)
@@ -30,17 +30,45 @@ const Row1 = (props) => {
           <AreaChart
             width={500}
             height={400}
-            data={data}
+            data={revenueExpenses}
             margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
+              top: 15,
+              right: 25,
+              left: -10,
+              bottom: 60,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tickLine={false}/>
-            <YAxis />
+            <defs>
+              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                <stop 
+                  offset="5%" 
+                  stopColor={palette.primary[300]}
+                  stopOpacity={0.5}/>
+                <stop 
+                  offset="95%" 
+                  stopColor={palette.primary[300]}
+                  stopOpacity={0}/>
+              </linearGradient>
+              <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
+                <stop 
+                  offset="5%" 
+                  stopColor={palette.primary[300]}
+                  stopOpacity={0.5}/>
+                <stop 
+                  offset="95%" 
+                  stopColor={palette.primary[300]}
+                  stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            <XAxis 
+              dataKey="name" 
+              tickLine={false} 
+              style={{ fontSize: "10px"}}/>
+            <YAxis 
+              axisLine={{strokeWidth: "0"}} 
+              tickLine={false} 
+              style={{ fontSize: "10px"}}
+              domain={[8000, 23000]}/>
             <Tooltip />
             <Area 
               type="monotone" 

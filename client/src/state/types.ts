@@ -5,7 +5,7 @@ export interface GetKpisResponse {
     totalProfit: number;
     totalRevenue: number;
     totalExpenses: number;
-    expensesBycategory: ExpensesByCategory;
+    expensesByCategory: ExpensesByCategory;
     monthlyData: Array<Month>;
     dailyData: Array<Day>;
 }
@@ -21,7 +21,7 @@ export interface Month {
     month: string;
     expenses: number;
     revenue: number;
-    nonoperationalExpenses: number;
+    nonOperationalExpenses: number;
     operationalExpenses: number;
 }
 
