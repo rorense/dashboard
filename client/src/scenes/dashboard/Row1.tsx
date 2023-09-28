@@ -2,7 +2,7 @@ import BoxHeader from '@/components/BoxHeader';
 import DashboardBox from '@/components/DashboardBox'
 import { useGetKpisQuery } from '@/state/api'
 import { useTheme } from '@mui/material';
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { Area, AreaChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const Row1 = () => {
@@ -116,6 +116,8 @@ const Row1 = () => {
           />
           <ResponsiveContainer width="100%" height="100%">
           <LineChart
+            width={500}
+            height={400}
             data={revenueProfit}
             margin={{
               top: 20,
@@ -127,14 +129,14 @@ const Row1 = () => {
             <XAxis 
               dataKey="name" 
               tickLine={false} 
-              style={{ fontSize: "10px"}}/>
+              style={{ fontSize: "10px" }}/>
             <YAxis 
               yAxisId="left"
               axisLine={false} 
               tickLine={false} 
-              style={{ fontSize: "10px"}} />
+              style={{ fontSize: "10px" }} />
             <YAxis 
-              yAxisId="rights"
+              yAxisId="right"
               orientation='right'
               axisLine={false} 
               tickLine={false} 
