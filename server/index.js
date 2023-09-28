@@ -8,6 +8,8 @@ import morgan from "morgan";
 import kpiRoutes from "./routes/kpi.js";
 import KPI from "./models/KPI.js";
 import { kpis } from "./data/data.js";
+import productRoutes from "./routes/product.js";
+import Product from "./models/Product.js";
 
 // Configuration of backend tools.
 dotenv.config();
@@ -22,6 +24,7 @@ app.use(cors());
 
 // Setting up routes
 app.use("/kpi", kpiRoutes);
+app.use("/product", productRoutes)
 
 // mongoose setup
 const PORT = process.env.PORT || 9000;
