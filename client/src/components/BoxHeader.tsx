@@ -9,6 +9,7 @@ type Props = {
     sideText: string;
 }
 
+// Box header component for adding heading and required text onto each dashboard items
 function BoxHeader({ icon, title, subtitle, sideText }: Props) {
     const { palette } = useTheme();
 
