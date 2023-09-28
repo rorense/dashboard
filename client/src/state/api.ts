@@ -4,14 +4,17 @@ import { GetKpisResponse } from "./types";
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
     reducerPath: "main",
-    tagTypes: [],
+    tagTypes: ["Kpis", "Products"],
     endpoints: (build) => ({
         getKpis: build.query<Array<GetKpisResponse>, void>({
             query: () => "kpi/kpis/",
-            // @ts-expect-error dddd
             providesTags: ["Kpis"]
+        }),
+        getProducts: build.query<Array<GetKpisResponse>, void>({
+            query: () => "products/products/",
+            providesTags: ["Products"]
         }),
     }),
 });
 
-export const { useGetKpisQuery } = api;
+export const { useGetKpisQuery, useGetProductsQuery } = api;
