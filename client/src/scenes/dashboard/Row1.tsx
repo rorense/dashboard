@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const Row1 = () => {
-  // Importing data from KPIs
+  // Importing data from KPIs for 1st chart
   const { data } = useGetKpisQuery();
   const { palette } = useTheme();
 
@@ -23,6 +23,7 @@ const Row1 = () => {
     );
   }, [data]);
 
+  // Revenue profit for 2nd chart
   const revenueProfit = useMemo(() => {
     return (
       data && 
@@ -31,6 +32,19 @@ const Row1 = () => {
             name: month.substring(0, 3),
             revenue: revenue,
             profit: (revenue - expenses).toFixed(2),
+          };
+        })
+    );
+  }, [data]);
+
+  // Revenue data for 3rd chart
+  const revenue = useMemo(() => {
+    return (
+      data && 
+        data[0].monthlyData.map(({ month, revenue }) => {
+          return {
+            name: month.substring(0, 3),
+            revenue: revenue,
           };
         })
     );
@@ -163,7 +177,7 @@ const Row1 = () => {
           </ResponsiveContainer>
         </DashboardBox>
 
-        {/* Chart 3 */}
+        {/* Third Chart */}
         <DashboardBox gridArea="c">
           <BoxHeader 
             title="Revenue Month by Month"
@@ -174,21 +188,42 @@ const Row1 = () => {
             <BarChart
             width={500}
             height={300}
-            data={data}
+            data={revenue}
             margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+              top: 17,
+              right: 15,
+              left: -5,
+              bottom: 58,
+            }}>
+            <defs>
+              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                <stop 
+                  offset="5%" 
+                  stopColor={palette.primary[300]}
+                  stopOpacity={0.8}/>
+                <stop 
+                  offset="95%" 
+                  stopColor={palette.primary[300]}
+                  stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+
+            <CartesianGrid vertical={false} stroke={palette.grey[800]} />
+            
+            <XAxis 
+              dataKey="name" 
+              axisLine={false} 
+              tickLine={false}
+              style={{ fontSize: "10px" }}/>
+
+            <YAxis 
+              axisLine={false} 
+              tickLine={false}
+              style={{ fontSize: "10px" }}/>
+
             <Tooltip />
-            <Legend />
-            <Bar dataKey="pv" fill="#8884d8" />
-            <Bar dataKey="uv" fill="#82ca9d" />
+
+            <Bar dataKey="revenue" fill="url(#colorRevenue)" />
             </BarChart>
           </ResponsiveContainer>
         </DashboardBox>
