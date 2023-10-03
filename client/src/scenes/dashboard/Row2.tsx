@@ -1,27 +1,36 @@
 import BoxHeader from '@/components/BoxHeader';
 import DashboardBox from '@/components/DashboardBox'
-import { useGetKpisQuery } from '@/state/api'
-import { useTheme } from '@mui/material';
+import FlexBetween from '@/components/Flexbetween';
+import { useGetKpisQuery, useGetProductsQuery } from '@/state/api'
+import { Box, Typography, useTheme } from '@mui/material';
 import { useMemo } from 'react';
-import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line } from 'recharts';
+import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Cell, Pie, PieChart } from 'recharts';
+
+// Example data for pie chart
+const pieData = [
+  { name: "Group A", value: 600 },
+  { name: "Group B", value: 400 },
+]
 
 const Row2 = () => {
 
-  const { data } = useGetKpisQuery();
+  const { data: operationalData } = useGetKpisQuery();
+  const { data: productData } = useGetProductsQuery();
   const { palette } = useTheme();
+  const pieColor = [palette.primary[800], palette.primary[300]]
   
   const operationalExpenses = useMemo(() => {
     return (
-      data && 
-        data[0].monthlyData.map(({ month, revenue, expenses }) => {
+      operationalData && 
+        operationalData[0].monthlyData.map(({ month, operationalExpenses, nonOperationalExpenses }) => {
           return {
             name: month.substring(0, 3),
-            revenue: revenue,
-            expenses: expenses,
+            "Operational Expenses": operationalExpenses,
+            "Non Operational Expenses": nonOperationalExpenses,
           }
         })
     );
-  }, [data]);
+  }, [operationalData]);
 
   return (
     <>  
@@ -58,7 +67,6 @@ const Row2 = () => {
               tickLine={false} 
               style={{ fontSize: "10px"}} />
             <Tooltip />
-
             <Line 
               yAxisId="left"
               type="monotone"
@@ -75,8 +83,51 @@ const Row2 = () => {
           </ResponsiveContainer>
         </DashboardBox>
 
-
-        <DashboardBox gridArea="e"></DashboardBox>
+        {/* Second chart */}
+        <DashboardBox gridArea="e">
+          <BoxHeader 
+            title="Campaigns and Targets"
+            sideText='+10%'
+          />
+          <FlexBetween mt="0.25rem" gap="1.5rem" pr="1rem">
+            <PieChart 
+              width={110} 
+              height={100}
+              margin={{
+                top: 0,
+                right: -10,
+                left: 10,
+                bottom: 0,
+              }}>
+            <Pie
+              stroke='none'
+              data={pieData}
+              innerRadius={18}
+              outerRadius={38}
+              paddingAngle={2}
+              dataKey="value"
+            >
+            {pieData.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`} 
+                fill={pieColor[index]} />
+            ))}
+            </Pie>
+          </PieChart>
+          <Box ml="-0.7rem" flexBasis="40%" textAlign="center">
+              <Typography variant='h5'>Target Sales</Typography>
+              <Typography m="0.3rem 0" variant='h3' color={palette.primary[300]}>83</Typography>
+              <Typography variant='h6'>Finance Goals of the Campaign</Typography>
+          </Box>
+          <Box  flexBasis="40%" >
+              <Typography variant='h5'>Losses in Revenue</Typography>
+              <Typography variant='h6'>Losses are down 26%</Typography>
+              <Typography mt="0.4rem" variant='h5'>Profit Margins</Typography>
+              <Typography variant='h6'>Margins are up by 30%</Typography>
+          </Box>
+        </FlexBetween>
+        </DashboardBox>
+      
         <DashboardBox gridArea="f"></DashboardBox>
     </>
   )
