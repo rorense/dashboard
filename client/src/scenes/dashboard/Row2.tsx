@@ -1,12 +1,13 @@
 import BoxHeader from '@/components/BoxHeader';
 import DashboardBox from '@/components/DashboardBox'
-import { useGetProductsQuery } from '@/state/api'
+import { useGetKpisQuery } from '@/state/api'
 import { useTheme } from '@mui/material';
-import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
+import { useMemo } from 'react';
+import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line } from 'recharts';
 
 const Row2 = () => {
 
-  const { data } = useGetProductsQuery();
+  const { data } = useGetKpisQuery();
   const { palette } = useTheme();
   
   const operationalExpenses = useMemo(() => {
@@ -21,6 +22,7 @@ const Row2 = () => {
         })
     );
   }, [data]);
+
   return (
     <>  
         {/* First chart */}
