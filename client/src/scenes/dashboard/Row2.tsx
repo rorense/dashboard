@@ -141,7 +141,7 @@ const Row2 = () => {
         </FlexBetween>
         </DashboardBox>
 
-        {/* Third chart */}
+        {/* Third chart  */}
         <DashboardBox gridArea="f">
           <BoxHeader title='Product Prices vs Expenses' sideText='+6%'/>\
           <ResponsiveContainer width="100%" height="100%">
