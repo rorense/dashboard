@@ -1,13 +1,17 @@
 import DashboardBox from '@/components/DashboardBox'
-import React from 'react'
+import { useGetTransactionsQuery } from '@/state/api'
 
 function Row3() {
+
+  const { data: transactionsData } = useGetTransactionsQuery();
+  console.log("transactionsData:", transactionsData)
+
   return (
     <>
-    <DashboardBox gridArea="g"></DashboardBox>
-    <DashboardBox gridArea="h"></DashboardBox>
-    <DashboardBox gridArea="i"></DashboardBox>
-    <DashboardBox gridArea="j"></DashboardBox>
+      <DashboardBox gridArea="g"></DashboardBox>
+      <DashboardBox gridArea="h"></DashboardBox>
+      <DashboardBox gridArea="i"></DashboardBox>
+      <DashboardBox gridArea="j"></DashboardBox>
     </>
   )
 }
