@@ -32,7 +32,7 @@ function Row3() {
 
   return (
     <>
-    {/* First Chart */}
+    {/* First Chart*/}
       <DashboardBox gridArea="g">
         <BoxHeader title="List of Products" sideText={`${productData?.length} products`}/>
         <Box 
