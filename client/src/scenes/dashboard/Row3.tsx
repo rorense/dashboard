@@ -30,6 +30,31 @@ function Row3() {
     },
   ]
 
+  const transactionColumns = [
+    {
+      field: "_id",
+      headername: "id",
+      flex: 1,
+    },
+    {
+      field: "buyer",
+      headername: "Buyer",
+      flex: 0.67,
+    },
+    {
+      field: "amount",
+      headername: "Amount",
+      flex: 0.35,
+      renderCell: (params: GridCellParams) => `$${params.value}`,
+    },
+    {
+      field: "productIds",
+      headername: "Count",
+      flex: 0.1,
+      renderCell: (params: GridCellParams) => (params.value as Array<string>).length,
+    },
+  ]
+
   return (
     <>
     {/* First Chart*/}
@@ -62,8 +87,37 @@ function Row3() {
             rows={productData || [] } />
         </Box>
       </DashboardBox>
-
-      <DashboardBox gridArea="h"></DashboardBox>
+      
+      {/* Second chart */}
+      <DashboardBox gridArea="h">
+      <BoxHeader title="Recent Orders" sideText={`${transactionData?.length} latest orders`}/>
+        <Box 
+          mt="1rem"
+          p="0 0.5rem"
+          height="80%"
+          sx={{
+            "& .MuiDataGrid-root": {
+              color: palette.grey[300],
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: `1px solid ${palette.grey[800]} !important`,
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              borderBottom: `1px solid ${palette.grey[800]} !important`,
+            },
+            "& .MuiDataGrid-columnSeparator": {
+              visibility: "hidden",
+            },
+          }}>
+          <DataGrid 
+            columnHeaderHeight={25}
+            rowHeight={35}
+            hideFooter={true}
+            columns={transactionColumns} 
+            rows={ transactionData|| [] } />
+        </Box>
+      </DashboardBox>
 
       <DashboardBox gridArea="i"></DashboardBox>
 
