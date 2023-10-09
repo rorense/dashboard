@@ -44,8 +44,20 @@ function Row3() {
               color: palette.grey[300],
               border: "none",
             },
+            "& .MuiDataGrid-cell": {
+              borderBottom: `1px solid ${palette.grey[800]} !important`,
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              borderBottom: `1px solid ${palette.grey[800]} !important`,
+            },
+            "& .MuiDataGrid-columnSeparator": {
+              visibility: "hidden",
+            },
           }}>
           <DataGrid 
+            columnHeaderHeight={25}
+            rowHeight={35}
+            hideFooter={true}
             columns={productColumns} 
             rows={productData || [] } />
         </Box>
