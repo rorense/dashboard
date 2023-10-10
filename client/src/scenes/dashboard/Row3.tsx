@@ -1,8 +1,10 @@
 import BoxHeader from '@/components/BoxHeader';
 import DashboardBox from '@/components/DashboardBox'
+import FlexBetween from '@/components/Flexbetween';
 import { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } from '@/state/api'
-import { Box, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { DataGrid, GridCellParams } from '@mui/x-data-grid';
+import { PieChart, Pie, Cell } from 'recharts';
 
 function Row3() {
   const { palette } = useTheme();
@@ -118,8 +120,33 @@ function Row3() {
             rows={ transactionData|| [] } />
         </Box>
       </DashboardBox>
-
-      <DashboardBox gridArea="i"></DashboardBox>
+      
+      {/* Third chart */}
+      <DashboardBox gridArea="i">
+        <BoxHeader title='Expense Breakdown By Category' sideText='+4%'/>
+        <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
+        <PieChart 
+                width={110} 
+                height={100}
+                >
+              <Pie
+                stroke='none'
+                data={pieData}
+                innerRadius={18}
+                outerRadius={35}
+                paddingAngle={2}
+                dataKey="value"
+              >
+              {pieData.map((entry, index) => (
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={pieColor[index]} />
+              ))}
+              </Pie>
+            </PieChart>
+            <Typography variant='h5'>{data[0].name}</Typography>
+        </FlexBetween>
+      </DashboardBox>
 
       <DashboardBox gridArea="j"></DashboardBox>
     </>
