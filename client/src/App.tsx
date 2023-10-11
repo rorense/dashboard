@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Box } from "@mui/material";
 import  Navbar  from "@/scenes/navbar";
 import Dashboard from "@/scenes/dashboard"
+import Prediction from "./scenes/predictions/prediction"
 
 // Main app component
 function App() {
@@ -22,8 +23,8 @@ function App() {
 
               <Route path="/" element={<Dashboard />}/>
 
-              <Route path="/predictions" element={
-                <div>Prediction Page</div>}/>
+              <Route path="/predictions" element={<Prediction />}/>
+
 
             </Routes>
           </Box>
