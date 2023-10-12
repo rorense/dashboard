@@ -87,7 +87,7 @@ function Predictions() {
               strokeWidth={0}
               dot={{ strokeWidth: 5 }}
               />
-            <Line 
+            <Line  
               type="monotone"
               dataKey="Regression Line"
               stroke="#8884d8"
