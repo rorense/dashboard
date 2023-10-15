@@ -12,7 +12,7 @@ function Predictions() {
   const [isPrediction, setIsPrediction] = useState(false);
   const { data: kpiData } = useGetKpisQuery();
 
-  // Formatting data for machine learning using regression
+  // Formatting data for machine learning using regression 
   const formattedData = useMemo(() => {
     if (!kpiData) return [];
     const monthData = kpiData[0].monthlyData;
